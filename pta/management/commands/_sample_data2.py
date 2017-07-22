@@ -5,33 +5,33 @@ from django.contrib.auth.models import User
 
 class Sample1:
     teachers = (
-        (20,'Victor','victor@nadir.org','Astrology'),
-        (21,'Wanda','wanda@zenith.com','Biology'),
-        (22,'Xavier','xavier@acme.com','Mathematics'),
-        (23,'Yolanda','yolanda@nadir.org','Astronomy'),
+        (20,'Victor','Victorious','victor@nadir.org','Astrology'),
+        (21,'Wanda','Wilkins','wanda@zenith.com','Biology'),
+        (22,'Xavier','Xanadu','xavier@acme.com','Mathematics'),
+        (23,'Yolanda','Vega','yolanda@nadir.org','Astronomy'),
     )
 
     parents = (
-        (0,'Alice','alice@acme.com'),
-        (1,'Bob','bob@nadir.org'),
-        (2,'Carol','carol@zenith.net'),
-        (3,'Dave','dave@acme.com'),
-        (4,'Eve','eve@nadir.com'),
-        (5,'Frank','frank@nadir.com'),
-        (6,'Gloria','gloria@zenith.com'),
-        (7,'Henry','henry@acme.com'),
-        (8,'Inez','inez@nadir.org'),
-        (9,'Jake','jake@zenith.com'),
-        (10,'Kat','kat@acme.com'),
-        (11, 'Louis', 'louis@nadir.org'),
-        (12, 'Mary', 'mary@zenith.com'),
-        (13, 'Noel', 'noel@acme.com'),
-        (14, 'Olivia', 'olivia@nadir.org'),
-        (15, 'Peter', 'peter@zenith.com'),
-        (16, 'Robert', 'robert@acme.com'),
-        (17, 'Susan', 'susan@nadir.org'),
-        (18, 'Tyler', 'tyler@zenith.com'),
-        (19, 'Unelda', 'unelda@acme.com'),
+        (0,'Alice','Apples','alice@acme.com'),
+        (1,'Bob','Bernardo','bob@nadir.org'),
+        (2,'Carol','Chernardo','carol@zenith.net'),
+        (3,'Dave','Dernardo','dave@acme.com'),
+        (4,'Eve','Ernardo','eve@nadir.com'),
+        (5,'Frank','Fernardo','frank@nadir.com'),
+        (6,'Gloria','Gernardo','gloria@zenith.com'),
+        (7,'Henry','Hernardo','henry@acme.com'),
+        (8,'Inez','Iernardo','inez@nadir.org'),
+        (9,'Jake','Jernardo','jake@zenith.com'),
+        (10,'Kat','Kernardo','kat@acme.com'),
+        (11, 'Louis','Lernardo','louis@nadir.org'),
+        (12, 'Mary','Mernardo', 'mary@zenith.com'),
+        (13, 'Noel','Nernardo', 'noel@acme.com'),
+        (14, 'Olivia','Ornardo', 'olivia@nadir.org'),
+        (15, 'Peter','Pernardo', 'peter@zenith.com'),
+        (16, 'Robert','Rernardo', 'robert@acme.com'),
+        (17, 'Susan','Sernardo', 'susan@nadir.org'),
+        (18, 'Tyler','Ternardo', 'tyler@zenith.com'),
+        (19, 'Unelda','Uernardo', 'unelda@acme.com'),
     )
 
     homework = (
@@ -64,7 +64,8 @@ def createSample(data):
         p = User(
                 username=per[1].lower(),
                 first_name=per[1],
-                email=per[2],
+                last_name=per[2],
+                email=per[3],
                 )
         pwd = per[1].lower()[0]
         p.set_password(pwd)
@@ -82,7 +83,8 @@ def createSample(data):
          p = User(
              username=per[1].lower(),
              first_name=per[1],
-             email=per[2],
+             last_name=per[2],
+             email=per[3],
          )
          pwd = per[1].lower()[0]
          p.set_password(pwd)

@@ -9,7 +9,7 @@ class Teacher(models.Model):
     classinfo = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.user.username
+        return self.user.first_name + ' ' + self.user.last_name
 
 class ParentalUnit(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -24,6 +24,8 @@ class Homework(models.Model):
     description = models.TextField()
     date_assigned = models.DateTimeField(blank=True, null=True)
     due_date = models.DateTimeField(blank=True, null=True)
+    points = models.DecimalField(blank=True, null=True, max_digits=3, decimal_places=1)
+    grade = models.DecimalField(blank=True, null=True, max_digits=6, decimal_places=3)
 
     def __str__(self):
         return self.teacher.user.username + ' ' + self.title
@@ -35,6 +37,7 @@ class WishlistItem(models.Model):
     description = models.CharField(max_length=150)
     teacher = models.ForeignKey(Teacher, null=False, on_delete=models.CASCADE)
     parentalUnit = models.ForeignKey(ParentalUnit, blank=True, null=True, on_delete=models.SET_NULL)
+    received = models.BooleanField(default=False)
 
     def __str__(self):
         return self.description
@@ -43,6 +46,7 @@ class Activity(models.Model):
     description = models.CharField(max_length=150)
     teacher = models.ForeignKey(Teacher, null=False, on_delete=models.CASCADE)
     date_of = models.DateTimeField()
+    complete = models.BooleanField(default=False)
 
     def __str__(self):
         return self.description
@@ -56,6 +60,7 @@ class TodoItem(models.Model):
     date_assigned = models.DateTimeField(blank=True, null=True)
     due_date = models.DateTimeField(blank=True, null=True)
     assignedTo = models.ManyToManyField(ParentalUnit, related_name='assigned_to')
+    complete = models.BooleanField(default=False)
 
     def __str__(self):
         return self.description
