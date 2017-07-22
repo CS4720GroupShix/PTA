@@ -2,7 +2,7 @@
 from django.contrib import admin
 
 from .models import Teacher, ParentalUnit, Homework, WishlistItem, \
-    Activity, TodoItem, Message
+    Activity, TodoItem, Message, TeamMember
 
 class TeacherModel(admin.ModelAdmin):
     def firstname(self, instance):
@@ -46,4 +46,4 @@ admin.site.register(WishlistItem)
 admin.site.register(Activity)
 admin.site.register(TodoItem, TodoItemAdmin)
 admin.site.register(Message, MessageAdmin)
-
+admin.site.register(TeamMember)

@@ -78,3 +78,11 @@ class Message(models.Model):
 # class MessageTo(models.Model):
 #     message = models.ForeignKey(Message, null=False, on_delete=models.CASCADE)
 #     parentalunit = models.ForeignKey(ParentalUnit, null=False, on_delete=models.CASCADE)
+
+class TeamMember(models.Model):
+    fullname = models.CharField(max_length=50)
+    description = models.CharField(max_length=300)
+    imagename = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.fullname

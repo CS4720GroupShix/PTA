@@ -1,6 +1,6 @@
 {% extends "pta/base.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Collaborate! dashboard{% endblock %}
 
 {% block content %}
     <div id="mainNavigationRow">
@@ -12,7 +12,7 @@
                 <li><a href="#">To-Do List</a></li>
                 <li><a href="#">WishList</a></li>
                 <li><a href="#">Message Board</a></li>
-                <li><a href="#">Meet the Team</a></li>
+                <li><a href="{% url 'meettheteam' %}">Meet the Team</a></li>
 
                 <!--<li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Specials

@@ -1,0 +1,47 @@
+{% extends "pta/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}Meet the Team{% endblock %}
+
+{% block content %}
+    <div id="mainNavigationRow">
+        <nav class="navbar navbar-default">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">User Info</a></li>
+                <li><a href="#">Homework</a></li>
+                <li><a href="#">To-Do List</a></li>
+                <li><a href="#">WishList</a></li>
+                <li><a href="#">Message Board</a></li>
+                <li class="active"><a href="{% url 'meettheteam' %}">Meet the Team</a></li>
+            </ul>
+        </nav>
+    </div>  <!-- end mainNavigationRow -->
+
+
+        <p><strong>{{ person.fullname }}</strong></p>
+        <p>{{ person.description }}</p>
+
+    {% for person in teammember_list.all %}
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="thumbnail">
+                <a href="#"><img src="/static/pta/{{ person.imagename }}" class="img-thumbnail" width="200" height="200"
+                                 alt="pic of {{ person.fullname }}"></a>
+                <div class="caption text-center">
+                    <p><strong>{{ person.fullname }}</strong></p>
+                </div>
+                <div class="caption text-justify">
+                    <p>{{ person.description }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
