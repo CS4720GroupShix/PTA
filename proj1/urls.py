@@ -17,12 +17,13 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import TemplateView
-from pta import views
+from pta import views as pta_views
 
 urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'pta/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/login'}, name='logout'),
-    url(r'^$', views.homepage, name='homepage'),
+    url(r'^signup/$', pta_views.signup, name='signup'),
+    url(r'^$', pta_views.homepage, name='homepage'),
     #url(r'^$', TemplateView.as_view(template_name='pta/home.html'), name='homepage'),
     url(r'^pta/', include('pta.urls')),
     url(r'^admin/', admin.site.urls),
