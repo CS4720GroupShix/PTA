@@ -9,13 +9,35 @@ from django.contrib.auth.decorators import login_required
 from .models import Teacher, ParentalUnit, TeamMember
 from django.views import generic
 from django.utils.decorators import method_decorator
+from django.contrib import auth
 
 # Create your views here.
 from django.http import HttpResponse
 
 @login_required()
 def homepage(request):
-     return render(request, 'pta/home.html')
+    # print(request.user)
+    # print(request.POST)
+    #current_user = auth.get_user(request)
+    try:
+        parental = ParentalUnit.objects.get(user=request.user)
+        teacher = parental.teacher
+    except ParentalUnit.DoesNotExist:
+        parental = None
+
+    if parental:
+        print(parental.user)
+        print(parental.teacher)
+        return render(request, 'pta/home.html', {'parentalunit': parental, })
+    else:
+        return render(request, 'pta/home.html')
+
+
+#@method_decorator(login_required, name='dispatch')
+# class HomeView(generic.DetailView):
+#     model = ParentalUnit
+#     template_name = 'pta/home.html'
+
 
 # @login_required()
 # def meettheteam(request):

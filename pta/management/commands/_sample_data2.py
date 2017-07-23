@@ -72,7 +72,7 @@ def createSample(data):
         p.save()
         teacher = Teacher(
             user=p,
-            classinfo=per[3],
+            classinfo=per[4],
         )
         teacher.save()
         tl.append(teacher)

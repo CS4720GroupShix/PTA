@@ -6,23 +6,17 @@
     <div id="mainNavigationRow">
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">User Info</a></li>
+                <li class="active"><a href="#">User Info</a></li>
                 <li><a href="#">Homework</a></li>
                 <li><a href="#">To-Do List</a></li>
                 <li><a href="#">WishList</a></li>
                 <li><a href="#">Message Board</a></li>
                 <li><a href="{% url 'meettheteam' %}">Meet the Team</a></li>
-
-                <!--<li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Specials
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Special 1</a></li>
-                        <li><a href="#">Special 2</a></li>
-                    </ul>
-                </li>-->
             </ul>
         </nav>
     </div>  <!-- end mainNavigationRow -->
+
+    <p>Username: {{ user }}</p>
+    <p>Teacher: {{ parentalunit.teacher }}</p>
+    <p>Classroom info: {{ parentalunit.teacher.classinfo }}</p>
 {% endblock %}
