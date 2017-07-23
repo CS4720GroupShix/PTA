@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca7b7f24-a98b-4a32-98e3-cebe4ada36ce" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/management/commands/addprojectteammembers.py" afterPath="$PROJECT_DIR$/pta/management/commands/addprojectteammembers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/templates/pta/home.html" afterPath="$PROJECT_DIR$/pta/templates/pta/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/templates/pta/login.html" afterPath="$PROJECT_DIR$/pta/templates/pta/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/views.py" afterPath="$PROJECT_DIR$/pta/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -727,7 +722,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500773486818</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="fixed links on the tabs">
+      <created>1500831335580</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1500831335580</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
