@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ca7b7f24-a98b-4a32-98e3-cebe4ada36ce" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/templates/pta/meettheteam.html" afterPath="$PROJECT_DIR$/pta/templates/pta/meettheteam.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -94,7 +95,7 @@
         <entry file="file://$PROJECT_DIR$/pta/management/commands/addprojectteammembers.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="17" column="35" lean-forward="true" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+              <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -118,7 +119,7 @@
         <entry file="file://$PROJECT_DIR$/pta/management/commands/_sample_data2.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
-              <caret line="71" column="16" lean-forward="true" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
+              <caret line="71" column="16" lean-forward="false" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
               <folding>
                 <element signature="e#0#103#0" expanded="true" />
               </folding>
@@ -139,8 +140,8 @@
       <file leaf-file-name="meettheteam.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pta/templates/pta/meettheteam.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+            <state relative-caret-position="187">
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -149,7 +150,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pta/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
+            <state relative-caret-position="51">
               <caret line="30" column="75" lean-forward="false" selection-start-line="30" selection-start-column="75" selection-end-line="30" selection-end-column="75" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
@@ -158,11 +159,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pta/templates/pta/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="305">
+              <caret line="47" column="59" lean-forward="false" selection-start-line="47" selection-start-column="41" selection-end-line="47" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="home.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pta/templates/pta/home.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
-              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -200,12 +211,12 @@
         <option value="$PROJECT_DIR$/pta/admin.py" />
         <option value="$PROJECT_DIR$/pta/templates/pta/login.html" />
         <option value="$PROJECT_DIR$/proj1/urls.py" />
-        <option value="$PROJECT_DIR$/pta/templates/pta/meettheteam.html" />
         <option value="$PROJECT_DIR$/pta/models.py" />
         <option value="$PROJECT_DIR$/pta/management/commands/addprojectteammembers.py" />
         <option value="$PROJECT_DIR$/pta/views.py" />
         <option value="$PROJECT_DIR$/pta/management/commands/_sample_data2.py" />
         <option value="$PROJECT_DIR$/pta/templates/pta/home.html" />
+        <option value="$PROJECT_DIR$/pta/templates/pta/meettheteam.html" />
       </list>
     </option>
   </component>
@@ -702,7 +713,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500773099823</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added a rudimentary User Info page for parents.">
+      <created>1500773135331</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1500773135331</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -785,7 +803,8 @@
     <MESSAGE value="added Register functionality.  no styling yet" />
     <MESSAGE value="added in &quot;about the team&quot; page, which reads from the TeamMembers database, so we get 100% on the final." />
     <MESSAGE value="added addprojectteammembers.py script to fill in the team member information.  also fields to mark homework as graded, and todolist and wishlist items as 'complete'." />
-    <option name="LAST_COMMIT_MESSAGE" value="added addprojectteammembers.py script to fill in the team member information.  also fields to mark homework as graded, and todolist and wishlist items as 'complete'." />
+    <MESSAGE value="Added a rudimentary User Info page for parents." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a rudimentary User Info page for parents." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -954,13 +973,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pta/templates/pta/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="47" column="59" lean-forward="false" selection-start-line="47" selection-start-column="41" selection-end-line="47" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pta/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
@@ -1001,18 +1013,10 @@
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/37b448b8/81e44390-80b3-49e4-bd89-0526905fa5e6/main.sqlite_sequence" />
-    <entry file="file://$PROJECT_DIR$/pta/templates/pta/meettheteam.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pta/management/commands/addprojectteammembers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="17" column="35" lean-forward="true" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+          <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>
@@ -1050,16 +1054,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pta/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="30" column="75" lean-forward="false" selection-start-line="30" selection-start-column="75" selection-end-line="30" selection-end-column="75" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pta/management/commands/add_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1073,17 +1067,43 @@
     <entry file="file://$PROJECT_DIR$/pta/management/commands/_sample_data2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="71" column="16" lean-forward="true" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
+          <caret line="71" column="16" lean-forward="false" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
           <folding>
             <element signature="e#0#103#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pta/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="30" column="75" lean-forward="false" selection-start-line="30" selection-start-column="75" selection-end-line="30" selection-end-column="75" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pta/templates/pta/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="47" column="59" lean-forward="false" selection-start-line="47" selection-start-column="41" selection-end-line="47" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pta/templates/pta/meettheteam.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pta/templates/pta/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
         </state>
       </provider>
