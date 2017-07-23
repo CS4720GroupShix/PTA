@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca7b7f24-a98b-4a32-98e3-cebe4ada36ce" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/management/commands/_sample_data2.py" afterPath="$PROJECT_DIR$/pta/management/commands/_sample_data2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/templates/pta/home.html" afterPath="$PROJECT_DIR$/pta/templates/pta/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/views.py" afterPath="$PROJECT_DIR$/pta/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -699,7 +695,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500764592990</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="added addprojectteammembers.py script to fill in the team member information.  also fields to mark homework as graded, and todolist and wishlist items as 'complete'.">
+      <created>1500773099823</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1500773099823</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
