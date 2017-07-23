@@ -19,18 +19,30 @@ def homepage(request):
     # print(request.user)
     # print(request.POST)
     #current_user = auth.get_user(request)
+
+    myContext = {}
     try:
         parental = ParentalUnit.objects.get(user=request.user)
-        teacher = parental.teacher
     except ParentalUnit.DoesNotExist:
         parental = None
-
     if parental:
-        print(parental.user)
-        print(parental.teacher)
-        return render(request, 'pta/home.html', {'parentalunit': parental, })
+        # print(parental.user)
+        # print(parental.teacher)
+        # return render(request, 'pta/home.html', {'parentalunit': parental, })
+        myContext = {'parentalunit': parental,}
     else:
-        return render(request, 'pta/home.html')
+        try:
+            teacher = Teacher.objects.get(user=request.user)
+        except Teacher.DoesNotExist:
+            teacher = None
+        if teacher:
+            myContext = {'teacher': teacher, }
+            # return render(request, 'pta/home.html', {'teacher': teacher, })
+
+    if request.method == 'POST':
+        pass
+    else:
+        return render(request, 'pta/home.html', myContext)
 
 
 #@method_decorator(login_required, name='dispatch')
