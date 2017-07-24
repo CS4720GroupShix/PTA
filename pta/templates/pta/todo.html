@@ -8,7 +8,14 @@
     <div id="mainNavigationRow">
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav">
-                <li><a href="{% url 'homepage' %}">User Info</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">User Info
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'homepage' %}">View User Info</a></li>
+                        <li><a href="#">Edit User Info</a></li>
+                    </ul>
+                </li>
                 <li><a href="{% url 'homework' %}">Homework</a></li>
                 <li class="active"><a href="{% url 'todo' %}">To-Do List</a></li>
                 <li><a href="#">WishList</a></li>
