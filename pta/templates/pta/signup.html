@@ -1,10 +1,88 @@
 {% extends 'pta/base.html' %}
 
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
+
+    <form class="form-horizontal" method="post">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+                <strong><h2>Sign up</h2></strong>
+                <hr/>
+                {% for field in form %}
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 titillium"
+                               for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                        <div class="col-sm-10">
+                            {% if field.html_name == "password1" or field.html_name == "password2" %}
+                                <input type="password" class="form-control" id="{{ field.id_for_label }}"
+                                       name="{{ field.html_name }}">
+                            {% elif field.html_name == "teacher" %}
+                                <h4>{{ field }}</h4>
+                            {% else %}
+                                <input type="text" class="form-control" id="{{ field.id_for_label }}"
+                                       name="{{ field.html_name }}">
+                            {% endif %}
+                            {#                        {% if field.help_text %}#}
+                            {#                            <span class="help-block">{{ field.help_text|safe }}</span>#}
+                            {#                        {% endif %}#}
+                            {% for error in field.errors %}
+                                <p style="color: red">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+                <hr/>
+                <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+
+                {#                <div class="form-group">#}
+                {#                    <label class="control-label col-sm-2" for="{{ form.username.id_for_label }}">Username:</label>#}
+                {#                    <div class="col-sm-10">#}
+                {#                        <input type="text" class="form-control" id="{{ form.username.id_for_label }}"#}
+                {#                           name="{{ form.username.html_name }}" placeholder="Enter your Username">#}
+                {#                        <span class="help-block">{{ form.username.help_text }}</span>#}
+                {#                    </div>#}
+                {#                </div>#}
+                {#                <div class="form-group">#}
+                {#                    <label for="{{ form.first_name.id_for_label }}">First Name:</label>#}
+                {#                    <input type="text" class="form-control" id="{{ form.first_name.id_for_label }}"#}
+                {#                           name="{{ form.first_name.html_name }}" placeholder="Enter your First Name">#}
+                {#                    <span class="help-block">{{ form.first_name.help_text }}</span>#}
+                {#                </div>#}
+                {#                <div class="form-group">#}
+                {#                    <label for="{{ form.last_name.id_for_label }}">Last Name:</label>#}
+                {#                    <input type="text" class="form-control" id="{{ form.last_name.id_for_label }}"#}
+                {#                           name="{{ form.last_name.html_name }}" placeholder="Enter your Last Name">#}
+                {#                    <span class="help-block">{{ form.last_name.help_text }}</span>#}
+                {#                </div>#}
+                {#                <div class="form-group">#}
+                {#                    <label for="{{ form.email.id_for_label }}">Email:</label>#}
+                {#                    <input type="text" class="form-control" id="{{ form.email.id_for_label }}"#}
+                {#                           name="{{ form.email.html_name }}" placeholder="Enter your Email">#}
+                {#                    <span class="help-block">{{ form.email.help_text }}</span>#}
+                {#                </div>#}
+                {#                <div class="form-group">#}
+                {#                    <label for="{{ form.password1.id_for_label }}">Password:</label>#}
+                {#                    <input type="password" class="form-control" id="{{ form.password1.id_for_label }}"#}
+                {#                           name="{{ form.password1.html_name }}" placeholder="Enter your Password">#}
+                {#                    <span class="help-block">{{ form.password1.help_text|safe}}</span>#}
+                {#                </div>#}
+                {#                <div class="form-group">#}
+                {#                    <label for="{{ form.password2.id_for_label }}">Password Confirmation:</label>#}
+                {#                    <input type="password" class="form-control" id="{{ form.password2.id_for_label }}"#}
+                {#                           name="{{ form.password2.html_name }}" placeholder="Enter your Password Again">#}
+                {#                    <span class="help-block">{{ form.password2.help_text }}</span>#}
+                {#                </div>#}
+                {#                <div class="form-group">#}
+                {#                    <h4>Teacher: {{ form.teacher }}</h4>#}
+                {#                    <span class="help-block">Required.</span>#}
+                {#                </div>#}
+            </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </form>
+
 {% endblock %}

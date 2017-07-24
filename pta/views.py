@@ -26,23 +26,18 @@ def homepage(request):
     except ParentalUnit.DoesNotExist:
         parental = None
     if parental:
-        # print(parental.user)
-        # print(parental.teacher)
-        # return render(request, 'pta/home.html', {'parentalunit': parental, })
-        myContext = {'parentalunit': parental,}
+        parentlist = ParentalUnit.objects.filter(teacher=parental.teacher)
+        myContext = {'parentalunit': parental, 'teacher': parental.teacher, 'parentlist': parentlist,}
     else:
         try:
             teacher = Teacher.objects.get(user=request.user)
         except Teacher.DoesNotExist:
             teacher = None
         if teacher:
-            myContext = {'teacher': teacher, }
-            # return render(request, 'pta/home.html', {'teacher': teacher, })
+            parentlist = ParentalUnit.objects.filter(teacher=teacher)
+            myContext = {'teacher': teacher, 'parentlist': parentlist,}
 
-    if request.method == 'POST':
-        pass
-    else:
-        return render(request, 'pta/home.html', myContext)
+    return render(request, 'pta/home.html', myContext)
 
 
 #@method_decorator(login_required, name='dispatch')
@@ -83,6 +78,15 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'pta/signup.html', {'form': form})
+
+@login_required()
+def todo(request):
+    return render(request, 'pta/todo.html')
+
+@login_required()
+def homework(request):
+    return render(request, 'pta/homework.html')
+
 
 
 # def startpage(request):

@@ -28,4 +28,6 @@ urlpatterns = [
     #url(r'^$', TemplateView.as_view(template_name='pta/home.html'), name='homepage'),
     url(r'^pta/', include('pta.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^homework/$', pta_views.homework, name='homework'),
+    url(r'^todo/$', pta_views.todo, name='todo'),
 ]

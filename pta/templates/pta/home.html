@@ -6,9 +6,15 @@
     <div id="mainNavigationRow">
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">User Info</a></li>
-                <li><a href="#">Homework</a></li>
-                <li><a href="#">To-Do List</a></li>
+                <li class="active dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">User Info
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Edit User Info</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'homework' %}">Homework</a></li>
+                <li><a href="{% url 'todo' %}">To-Do List</a></li>
                 <li><a href="#">WishList</a></li>
                 <li><a href="#">Message Board</a></li>
                 <li><a href="{% url 'meettheteam' %}">Meet the Team</a></li>
@@ -16,38 +22,63 @@
         </nav>
     </div>  <!-- end mainNavigationRow -->
 
-    <p>Username: {{ user }}</p>
-    {% if parentalunit %}
-        <p>Teacher: {{ parentalunit.teacher }}</p>
-        <p>Classroom info: {{ parentalunit.teacher.classinfo }}</p>
-    {% elif teacher %}
-        <p>Classroom info: {{ teacher.classinfo }}</p>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editClassinfoModal">Edit class info</button>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            User
+        </div>
+        <div class="panel-body">
+            <p>Username: {{ user }}</p>
+            <p>First Name: {{ user.first_name }}</p>
+            <p>Last Name: {{ user.last_name }}</p>
+            <p>Email Address: {{ user.email }}</p>
+            <p><a href="#">Edit User Info</a></p>
+        </div>
+    </div>
 
-        <!-- edit Modal -->
-        <div id="editClassinfoModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Classroom Info
+        </div>
+        <div class="panel-body">
+            {% if teacher %}
+                <p>Teacher's Name: {{ teacher }}</p>
+                <p>Teacher's Username: {{ teacher.user }}</p>
+                <hr/>
+                <p>{{ teacher.classinfo }}</p>
+            {% else %}
+                <p>No classroom info to display for this user.</p>
+            {% endif %}
+        </div>
+    </div>
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Some text in the modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
+    {% if parentlist %}
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Classlist
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>username</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for par in parentlist %}
+                        <tr>
+                            <td>{{ par }}</td>
+                            <td>{{ par.user.first_name }}</td>
+                            <td>{{ par.user.last_name }}</td>
+                            <td>{{ par.user.email }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
-
-
-    {% else %}
-        <p>No classroom info to display for this user.</p>
     {% endif %}
 
 {% endblock %}

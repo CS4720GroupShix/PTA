@@ -5,16 +5,17 @@ div#logoRow h1 {
     margin-top: 0;
 }
 
-div#mainNavigationRow nav ul, h2, h3, h4, .sideHeader
+div#mainNavigationRow nav ul, h2, h3, h4, .titillium
 {
     font-family: 'Titillium Web', sans-serif;
 }
 
+/*
 .jumbotron {
     color: white;
     background-image: url("/static/pta/SunnydaleHighSchool.jpg");
     background-size: cover;
     min-height: 300px;
-    /* Image in the center of container */
+    //Image in the center of container
     background-position: center center;
-}
+}*/
