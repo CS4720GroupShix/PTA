@@ -2,7 +2,7 @@
 from django.contrib import admin
 
 from .models import Teacher, ParentalUnit, Homework, WishlistItem, \
-    Activity, TodoItem, Message, TeamMember
+    Activity, TodoItem, Message, TeamMember, HomeworkGrade
 
 class TeacherModel(admin.ModelAdmin):
     def firstname(self, instance):
@@ -36,7 +36,7 @@ class TodoItemAdmin(admin.ModelAdmin):
 #     model = MessageTo
 
 class MessageAdmin(admin.ModelAdmin):
-    readonly_fields = ('dateOf',)
+    readonly_fields = ('dateAndTimeOf',)
     # inlines = [MessageToInline]
 
 admin.site.register(Teacher, TeacherModel)
@@ -47,3 +47,4 @@ admin.site.register(Activity)
 admin.site.register(TodoItem, TodoItemAdmin)
 admin.site.register(Message, MessageAdmin)
 admin.site.register(TeamMember)
+admin.site.register(HomeworkGrade)

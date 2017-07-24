@@ -6,13 +6,18 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import Teacher, ParentalUnit, TeamMember
+from .models import Teacher, ParentalUnit, TeamMember, Homework
 from django.views import generic
 from django.utils.decorators import method_decorator
 from django.contrib import auth
 
 # Create your views here.
 from django.http import HttpResponse
+
+#@method_decorator(login_required, name='dispatch')
+# class HomeView(generic.DetailView):
+#     model = ParentalUnit
+#     template_name = 'pta/home.html'
 
 @login_required()
 def homepage(request):
@@ -39,12 +44,32 @@ def homepage(request):
 
     return render(request, 'pta/home.html', myContext)
 
+@login_required()
+def homework(request):
 
-#@method_decorator(login_required, name='dispatch')
-# class HomeView(generic.DetailView):
-#     model = ParentalUnit
-#     template_name = 'pta/home.html'
+    if request.method == 'POST':
+        pass
+    else:
+        myContext = {}
+        try:
+            parental = ParentalUnit.objects.get(user=request.user)
+        except ParentalUnit.DoesNotExist:
+            parental = None
 
+        if parental:
+            homeworkList = Homework.objects.filter(teacher=parental.teacher)
+            myContext = {'homeworkList': homeworkList, }
+        else:
+            try:
+                teacher = Teacher.objects.get(user=request.user)
+            except Teacher.DoesNotExist:
+                teacher = None
+
+            if teacher:
+                homeworkList = Homework.objects.filter(teacher=teacher)
+                myContext = {'homeworkList': homeworkList, }
+
+        return render(request, 'pta/homework.html', myContext)
 
 # @login_required()
 # def meettheteam(request):
@@ -82,12 +107,6 @@ def signup(request):
 @login_required()
 def todo(request):
     return render(request, 'pta/todo.html')
-
-@login_required()
-def homework(request):
-    return render(request, 'pta/homework.html')
-
-
 
 # def startpage(request):
 #      return render(request, 'pta/index.html')

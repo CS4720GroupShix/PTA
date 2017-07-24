@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.timezone import now
+from datetime import date
 
 # Create your models here.
 
@@ -22,16 +22,24 @@ class Homework(models.Model):
     teacher = models.ForeignKey(Teacher, null=False, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField()
-    date_assigned = models.DateTimeField(blank=True, null=True)
-    due_date = models.DateTimeField(blank=True, null=True)
+    date_assigned = models.DateField(default=date.today)
+    due_date = models.DateField(blank=True, null=True)
     points = models.DecimalField(blank=True, null=True, max_digits=3, decimal_places=1)
-    grade = models.DecimalField(blank=True, null=True, max_digits=6, decimal_places=3)
 
     def __str__(self):
         return self.teacher.user.username + ' ' + self.title
 
     class Meta:
         verbose_name_plural = 'Homework'
+        ordering = ['-date_assigned']
+
+class HomeworkGrade(models.Model):
+    homework = models.ForeignKey(Homework, null=False, on_delete=models.CASCADE)
+    parentalunit = models.ForeignKey(ParentalUnit, null=False, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.homework.__str__() + ' ' + self.parentalunit.__str__()
+
 
 class WishlistItem(models.Model):
     description = models.CharField(max_length=150)
@@ -45,7 +53,7 @@ class WishlistItem(models.Model):
 class Activity(models.Model):
     description = models.CharField(max_length=150)
     teacher = models.ForeignKey(Teacher, null=False, on_delete=models.CASCADE)
-    date_of = models.DateTimeField()
+    date_of = models.DateField()
     complete = models.BooleanField(default=False)
 
     def __str__(self):
@@ -57,8 +65,8 @@ class Activity(models.Model):
 class TodoItem(models.Model):
     description = models.CharField(max_length=150)
     teacher = models.ForeignKey(Teacher, null=False, on_delete=models.CASCADE)
-    date_assigned = models.DateTimeField(blank=True, null=True)
-    due_date = models.DateTimeField(blank=True, null=True)
+    date_assigned = models.DateField(default=date.today, blank=True, null=True)
+    due_date = models.DateField(blank=True, null=True)
     assignedTo = models.ManyToManyField(ParentalUnit, related_name='assigned_to')
     complete = models.BooleanField(default=False)
 
@@ -74,7 +82,7 @@ class TodoItem(models.Model):
 class Message(models.Model):
     teacher = models.ForeignKey(Teacher, null=False, on_delete=models.CASCADE)
     messageBody = models.TextField()
-    dateOf = models.DateTimeField(auto_now_add=True)
+    dateAndTimeOf = models.DateTimeField(auto_now_add=True)
     recipients = models.ManyToManyField(ParentalUnit, related_name='recipients_of')
 
     def __str__(self):

@@ -17,6 +17,7 @@
                     </ul>
                 </li>
                 <li class="active"><a href="{% url 'homework' %}">Homework</a></li>
+                <li><a href="#">Activities</a></li>
                 <li><a href="{% url 'todo' %}">To-Do List</a></li>
                 <li><a href="#">WishList</a></li>
                 <li><a href="#">Message Board</a></li>
@@ -25,29 +26,29 @@
         </nav>
     </div>  <!-- end mainNavigationRow -->
 
-
-        <p><strong>{{ person.fullname }}</strong></p>
-        <p>{{ person.description }}</p>
-
-    {% for person in teammember_list.all %}
-    <div class="row">
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-6">
-            <div class="thumbnail">
-                <a href="#"><img src="/static/pta/{{ person.imagename }}" class="img-thumbnail" width="200" height="200"
-                                 alt="pic of {{ person.fullname }}"></a>
-                <div class="caption text-center">
-                    <p><strong>{{ person.fullname }}</strong></p>
-                </div>
-                <div class="caption text-justify">
-                    <p>{{ person.description }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-        </div>
-    </div>
-    {% endfor %}
+    {% if homeworkList %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>title</th>
+                <th>description</th>
+                <th>date assigned</th>
+                <th>date due</th>
+                <th>points</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for hw in homeworkList %}
+                <tr>
+                    <td>{{ hw.title }}</td>
+                    <td>{{ hw.description }}</td>
+                    <td>{{ hw.date_assigned }}</td>
+                    <td>{{ hw.due_date }}</td>
+                    <td>{{ hw.points }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 
 {% endblock %}
