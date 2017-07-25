@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca7b7f24-a98b-4a32-98e3-cebe4ada36ce" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pta/static/pta/jeremysloan.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pta/migrations/0005_auto_20170724_2259.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pta/templates/pta/addwishlist.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pta/templates/pta/wishlist.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proj1/urls.py" afterPath="$PROJECT_DIR$/proj1/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/admin.py" afterPath="$PROJECT_DIR$/pta/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/forms.py" afterPath="$PROJECT_DIR$/pta/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/management/commands/addprojectteammembers.py" afterPath="$PROJECT_DIR$/pta/management/commands/addprojectteammembers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/models.py" afterPath="$PROJECT_DIR$/pta/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/templates/pta/base.html" afterPath="$PROJECT_DIR$/pta/templates/pta/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/templates/pta/homework.html" afterPath="$PROJECT_DIR$/pta/templates/pta/homework.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/templates/pta/todo.html" afterPath="$PROJECT_DIR$/pta/templates/pta/todo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pta/views.py" afterPath="$PROJECT_DIR$/pta/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -825,17 +811,23 @@
       <option name="project" value="LOCAL" />
       <updated>1500950239807</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="added wishlist functionality">
+      <created>1500959288834</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1500959288834</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="manage.py@proj1" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32719395" sideWeight="0.4978678" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.50852877" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2426869" sideWeight="0.4914712" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2426869" sideWeight="0.4914712" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.49573562" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -914,7 +906,8 @@
     <MESSAGE value="added classlist and formatting to userinfo page, added in Chen's revised signup page" />
     <MESSAGE value="added primitive homework screen" />
     <MESSAGE value="added the add homework button" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the add homework button" />
+    <MESSAGE value="added wishlist functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="added wishlist functionality" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
