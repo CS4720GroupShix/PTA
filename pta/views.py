@@ -65,7 +65,7 @@ def wishlist(request):
 
             print("testing we got here")
             id_list = request.POST.getlist('wishchk')
-            WishlistItem.objects.filter(id__in=id_list).update(parentalUnit=parental)
+            WishlistItem.objects.filter(id__in=id_list).filter(parentalUnit=None).update(parentalUnit=parental)
             WishlistItem.objects.filter(parentalUnit=parental).exclude(id__in=id_list).update(parentalUnit=None)
             # for wish in wishlist:
             #     chkid = 'chk' + str(wish.id)

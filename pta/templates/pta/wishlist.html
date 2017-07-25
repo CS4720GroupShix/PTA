@@ -45,7 +45,12 @@
                             {% if teacher %}
                                 <td>{{ wish.received }}</td>
                             {% elif teacherof %}
-                                <td><input type="checkbox" value="{{ wish.id }}" name="wishchk" {% if wish.parentalUnit == parental %}checked = true{% endif %}>
+                                <td><input type="checkbox" value="{{ wish.id }}" name="wishchk"
+                                           {% if wish.parentalUnit == parental %}
+                                                checked
+                                           {% elif wish.parentalUnit %}
+                                                disabled
+                                           {% endif %}>
                                 </td>
                             {% endif %}
                         </tr>
