@@ -2,29 +2,13 @@
 
 {% load staticfiles %}
 
-{% block title %}Meet the Team{% endblock %}
+{% block title %}Homework{% endblock %}
 
 {% block content %}
-    <div id="mainNavigationRow">
-        <nav class="navbar navbar-default">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'homepage' %}">User Info
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url 'homepage' %}">View User Info</a></li>
-                        <li><a href="#">Edit User Info</a></li>
-                    </ul>
-                </li>
-                <li class="active"><a href="{% url 'homework' %}">Homework</a></li>
-                <li><a href="#">Activities</a></li>
-                <li><a href="{% url 'todo' %}">To-Do List</a></li>
-                <li><a href="#">WishList</a></li>
-                <li><a href="#">Message Board</a></li>
-                <li><a href="{% url 'meettheteam' %}">Meet the Team</a></li>
-            </ul>
-        </nav>
-    </div>  <!-- end mainNavigationRow -->
+
+    {% if teacher %}
+        <a href="{% url 'addhomework' %}" class="btn btn-primary btn-lg" role="button">Add homework</a>
+    {% endif %}
 
     {% if homeworkList %}
         <table class="table">

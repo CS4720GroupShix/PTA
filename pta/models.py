@@ -20,11 +20,11 @@ class ParentalUnit(models.Model):
 
 class Homework(models.Model):
     teacher = models.ForeignKey(Teacher, null=False, on_delete=models.CASCADE)
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50, blank=False, null=False)
     description = models.TextField()
     date_assigned = models.DateField(default=date.today)
     due_date = models.DateField(blank=True, null=True)
-    points = models.DecimalField(blank=True, null=True, max_digits=3, decimal_places=1)
+    points = models.DecimalField(blank=True, null=True, max_digits=4, decimal_places=1)
 
     def __str__(self):
         return self.teacher.user.username + ' ' + self.title

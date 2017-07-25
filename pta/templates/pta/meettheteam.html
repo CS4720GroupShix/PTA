@@ -5,32 +5,7 @@
 {% block title %}Meet the Team{% endblock %}
 
 {% block content %}
-    <div id="mainNavigationRow">
-        <nav class="navbar navbar-default">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'homepage' %}">User Info
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url 'homepage' %}">View User Info</a></li>
-                        <li><a href="#">Edit User Info</a></li>
-                    </ul>
-                </li>
-                <li><a href="{% url 'homework' %}">Homework</a></li>
-                <li><a href="#">Activities</a></li>
-                <li><a href="{% url 'todo' %}">To-Do List</a></li>
-                <li><a href="#">WishList</a></li>
-                <li><a href="#">Message Board</a></li>
-                <li class="active"><a href="{% url 'meettheteam' %}">Meet the Team</a></li>
-            </ul>
-        </nav>
-    </div>  <!-- end mainNavigationRow -->
-
-
-        <p><strong>{{ person.fullname }}</strong></p>
-        <p>{{ person.description }}</p>
-
-    {% for person in teammember_list.all %}
+    {% for person in teammember_list %}
     <div class="row">
         <div class="col-md-3">
         </div>

@@ -2,9 +2,10 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from .models import Teacher, ParentalUnit
+from .models import Teacher, ParentalUnit, Homework
 from django.db import models
 from django.forms import ModelForm
+from datetime import date
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Required.')
@@ -16,11 +17,18 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
-# def teacher_list():
-#     teachers = Teacher.objects.all()
-#     return teachers
-#
-#
+class AddHomeworkForm(ModelForm):
+    # title = forms.CharField(max_length=50, required=True, help_text='Required.')
+    # description = forms.CharField(required=True, help_text='Required.')
+    # date_assigned = forms.DateField(required=True, default=date.today)
+    # date_due = forms.DateField(required=False)
+    # points = forms.DecimalField(required=False, max_digits=3, decimal_places=1)
+
+    class Meta:
+        model = Homework
+        fields = ('title', 'description', 'date_assigned', 'due_date', 'points',)
+
+
 # class UserChooseForm(forms.Form):
 #     choose_user = forms.ChoiceField(choices=user_list())
 #

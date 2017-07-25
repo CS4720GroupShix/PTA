@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from pta.forms import SignUpForm
+from pta.forms import SignUpForm, AddHomeworkForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
@@ -10,6 +10,7 @@ from .models import Teacher, ParentalUnit, TeamMember, Homework
 from django.views import generic
 from django.utils.decorators import method_decorator
 from django.contrib import auth
+from datetime import date
 
 # Create your views here.
 from django.http import HttpResponse
@@ -42,15 +43,36 @@ def homepage(request):
             parentlist = ParentalUnit.objects.filter(teacher=teacher)
             myContext = {'teacher': teacher, 'parentlist': parentlist,}
 
+    myContext['nbar'] = 'home'
     return render(request, 'pta/home.html', myContext)
 
 @login_required()
 def homework(request):
-
+    myContext = {}
     if request.method == 'POST':
-        pass
+        try:
+            teacher = Teacher.objects.get(user=request.user)
+        except Teacher.DoesNotExist:
+            teacher = None
+
+        if not teacher:
+            return HttpResponse("Permission denied")
+        else:
+            form = AddHomeworkForm(request.POST)
+            if form.is_valid():
+                print("Thinks form is valid")
+                #fields = ('title', 'description', 'date_assigned', 'due_date', 'points',)
+                # newhomework = Homework(
+                #     title = form.cleaned_data['title'],
+                #     description = form.cleaned_data['description'],
+                #     date_assigned = form.cleaned_data['date_assigned'],
+                #     due_date = form.cleaned_data['due_date'],
+                #     points = form.cleaned_data['points'],
+                #     teacher = teacher
+                # )
+                # newhomework.save()
+                return redirect('homework')
     else:
-        myContext = {}
         try:
             parental = ParentalUnit.objects.get(user=request.user)
         except ParentalUnit.DoesNotExist:
@@ -58,7 +80,7 @@ def homework(request):
 
         if parental:
             homeworkList = Homework.objects.filter(teacher=parental.teacher)
-            myContext = {'homeworkList': homeworkList, }
+            myContext['homeworkList'] = homeworkList
         else:
             try:
                 teacher = Teacher.objects.get(user=request.user)
@@ -67,18 +89,70 @@ def homework(request):
 
             if teacher:
                 homeworkList = Homework.objects.filter(teacher=teacher)
-                myContext = {'homeworkList': homeworkList, }
+                myContext['homeworkList'] = homeworkList
+                myContext['teacher'] = teacher
 
-        return render(request, 'pta/homework.html', myContext)
+        myContext['nbar'] = 'homework'
+        myContext['hwtoday'] = date.today()
 
-# @login_required()
-# def meettheteam(request):
-#      return render(request, 'pta/meettheteam.html')
+    return render(request, 'pta/homework.html', myContext)
 
-@method_decorator(login_required, name='dispatch')
-class AboutTeamView(generic.ListView):
-    model = TeamMember
-    template_name = 'pta/meettheteam.html'
+
+@login_required()
+def addhomework(request):
+
+    try:
+        teacher = Teacher.objects.get(user=request.user)
+    except Teacher.DoesNotExist:
+        teacher = None
+
+    if not teacher:
+        return HttpResponse("Invalid directory")
+
+    else:
+        myContext = {}
+        myContext['nbar'] = 'homework'
+        myContext['hwtoday'] = date.today()
+        myContext['teacher'] = teacher
+
+        if request.method == 'POST':
+            form = AddHomeworkForm(request.POST)
+            myContext['form'] = form
+
+            if form.is_valid():
+                newhomework = Homework(
+                     title = form.cleaned_data['title'],
+                     description = form.cleaned_data['description'],
+                     date_assigned = form.cleaned_data['date_assigned'],
+                     due_date = form.cleaned_data['due_date'],
+                     points = form.cleaned_data['points'],
+                     teacher = teacher
+                )
+                newhomework.save()
+                return redirect('addhomework')
+        else:
+            form = AddHomeworkForm()
+            myContext['form'] = form
+
+        return render(request, 'pta/addhomework.html', myContext)
+
+@login_required()
+def meettheteam(request):
+    myContext = {}
+    try:
+        teammember_list = TeamMember.objects.all()
+    except ParentalUnit.DoesNotExist:
+        teammember_list = None
+
+    if teammember_list:
+        myContext['teammember_list']=teammember_list
+    myContext['nbar'] = 'meettheteam'
+    return render(request, 'pta/meettheteam.html', myContext)
+
+# @method_decorator(login_required, name='dispatch')
+# class AboutTeamView(generic.ListView):
+#     model = TeamMember
+#     template_name = 'pta/meettheteam.html'
 
 
 def signup(request):
@@ -106,7 +180,9 @@ def signup(request):
 
 @login_required()
 def todo(request):
-    return render(request, 'pta/todo.html')
+    myContext = {}
+    myContext['nbar'] = 'todo'
+    return render(request, 'pta/todo.html', myContext)
 
 # def startpage(request):
 #      return render(request, 'pta/index.html')
