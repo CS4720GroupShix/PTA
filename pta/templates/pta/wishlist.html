@@ -1,0 +1,72 @@
+{% extends "pta/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}Wishlist{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+
+        <div class="col-md-8">
+            {% if teacher %}
+                <a href="{% url 'addwishlist' %}" class="btn btn-primary btn-lg" role="button">Add to wishlist</a>
+            {% elif teacherof %}
+                <form action="" method="post">
+                {% csrf_token %}
+
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <h4>Wishlist for {{ teacherof }}.</h4>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if wishlist %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Parent (thank you!)</th>
+                        {% if teacher %}
+                            <th>Received</th>
+                        {% elif teacherof %}
+                            <th>Sign up?</th>
+                        {% endif %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for wish in wishlist %}
+                        <tr>
+                            <td>{{ wish.description }}</td>
+                            <td>{{ wish.parentalUnit }}</td>
+                            {% if teacher %}
+                                <td>{{ wish.received }}</td>
+                            {% elif teacherof %}
+                                <td><input type="checkbox" value="{{ wish.id }}" name="wishchk" {% if wish.parentalUnit == parental %}checked = true{% endif %}>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                {% if teacherof %}
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Save changes</button>
+                    </div>
+
+                    </form>
+                {% endif %}
+
+            {% else %}
+                <br/>
+                <br/>
+                There is no wishlist to display for this user.
+            {% endif %}
+        </div>
+        <div class="col-md-2">
+        </div>
+{% endblock %}

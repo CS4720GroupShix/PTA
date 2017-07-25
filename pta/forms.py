@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from .models import Teacher, ParentalUnit, Homework
+from .models import Teacher, ParentalUnit, Homework, WishlistItem
 from django.db import models
 from django.forms import ModelForm
 from datetime import date
@@ -28,6 +28,10 @@ class AddHomeworkForm(ModelForm):
         model = Homework
         fields = ('title', 'description', 'date_assigned', 'due_date', 'points',)
 
+class AddWishlistForm(ModelForm):
+    class Meta:
+        model = WishlistItem
+        fields = ('id','description',)
 
 # class UserChooseForm(forms.Form):
 #     choose_user = forms.ChoiceField(choices=user_list())

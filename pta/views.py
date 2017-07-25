@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from pta.forms import SignUpForm, AddHomeworkForm
+from pta.forms import SignUpForm, AddHomeworkForm, AddWishlistForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import Teacher, ParentalUnit, TeamMember, Homework
+from .models import Teacher, ParentalUnit, TeamMember, Homework, WishlistItem
 from django.views import generic
 from django.utils.decorators import method_decorator
 from django.contrib import auth
@@ -45,6 +45,99 @@ def homepage(request):
 
     myContext['nbar'] = 'home'
     return render(request, 'pta/home.html', myContext)
+
+@login_required()
+def wishlist(request):
+    myContext = {}
+    myContext['nbar'] = 'wishlist'
+
+    if request.method == 'POST':
+        try:
+            parental = ParentalUnit.objects.get(user=request.user)
+        except ParentalUnit.DoesNotExist:
+            parental = None
+
+        if parental:
+            wishlist = WishlistItem.objects.filter(teacher=parental.teacher, received=False)
+            myContext['teacherof'] = parental.teacher
+            myContext['parental'] = parental
+            myContext['wishlist'] = wishlist
+
+            print("testing we got here")
+            id_list = request.POST.getlist('wishchk')
+            WishlistItem.objects.filter(id__in=id_list).update(parentalUnit=parental)
+            WishlistItem.objects.filter(parentalUnit=parental).exclude(id__in=id_list).update(parentalUnit=None)
+            # for wish in wishlist:
+            #     chkid = 'chk' + str(wish.id)
+            #     print(chkid)
+            #     is_checked = request.POST.get(chkid, False)
+            #     print(is_checked)
+
+    else:
+        try:
+            parental = ParentalUnit.objects.get(user=request.user)
+        except ParentalUnit.DoesNotExist:
+            parental = None
+
+        if parental:
+            wishlist = WishlistItem.objects.filter(teacher=parental.teacher, received=False)
+            myContext['teacherof'] = parental.teacher
+            myContext['parental'] = parental
+            myContext['wishlist'] = wishlist
+        else:
+            try:
+                teacher = Teacher.objects.get(user=request.user)
+            except Teacher.DoesNotExist:
+                teacher = None
+
+            if teacher:
+                wishlist = WishlistItem.objects.filter(teacher=teacher)
+                myContext['wishlist'] = wishlist
+                myContext['teacher'] = teacher
+
+    return render(request, 'pta/wishlist.html', myContext)
+
+@login_required()
+def addwishlist(request):
+
+    try:
+        teacher = Teacher.objects.get(user=request.user)
+    except Teacher.DoesNotExist:
+        teacher = None
+
+    if not teacher:
+        return HttpResponse("Invalid directory")
+
+    else:
+        myContext = {}
+        myContext['nbar'] = 'wishlist'
+        myContext['teacher'] = teacher
+
+        if request.method == 'POST':
+            form = AddWishlistForm(request.POST)
+            myContext['form'] = form
+
+            if form.is_valid():
+                newWishlistItem = WishlistItem(
+                     description = form.cleaned_data['description'],
+                     teacher = teacher,
+                     received = False,
+                )
+                newWishlistItem.save()
+                return redirect('addwishlist')
+        else:
+            form = AddWishlistForm()
+            myContext['form'] = form
+
+    return render(request, 'pta/addwishlist.html', myContext)
+
+
+
+
+
+
+
+
 
 @login_required()
 def homework(request):
@@ -134,7 +227,7 @@ def addhomework(request):
             form = AddHomeworkForm()
             myContext['form'] = form
 
-        return render(request, 'pta/addhomework.html', myContext)
+    return render(request, 'pta/addhomework.html', myContext)
 
 @login_required()
 def meettheteam(request):

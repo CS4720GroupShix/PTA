@@ -20,7 +20,7 @@ class ParentalUnit(models.Model):
 
 class Homework(models.Model):
     teacher = models.ForeignKey(Teacher, null=False, on_delete=models.CASCADE)
-    title = models.CharField(max_length=50, blank=False, null=False)
+    title = models.CharField(max_length=50)
     description = models.TextField()
     date_assigned = models.DateField(default=date.today)
     due_date = models.DateField(blank=True, null=True)
@@ -63,11 +63,11 @@ class Activity(models.Model):
         verbose_name_plural = 'Activities'
 
 class TodoItem(models.Model):
-    description = models.CharField(max_length=150)
+    description = models.TextField()
     teacher = models.ForeignKey(Teacher, null=False, on_delete=models.CASCADE)
     date_assigned = models.DateField(default=date.today, blank=True, null=True)
     due_date = models.DateField(blank=True, null=True)
-    assignedTo = models.ManyToManyField(ParentalUnit, related_name='assigned_to')
+    # assignedTo = models.ManyToManyField(ParentalUnit, related_name='assigned_to')
     complete = models.BooleanField(default=False)
 
     def __str__(self):

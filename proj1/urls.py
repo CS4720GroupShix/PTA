@@ -32,4 +32,6 @@ urlpatterns = [
     url(r'^homework/$', pta_views.homework, name='homework'),
     url(r'^homework/add$', pta_views.addhomework, name='addhomework'),
     url(r'^todo/$', pta_views.todo, name='todo'),
+    url(r'^wishlist/$', pta_views.wishlist, name='wishlist'),
+    url(r'^wishlist/add$', pta_views.addwishlist, name='addwishlist'),
 ]

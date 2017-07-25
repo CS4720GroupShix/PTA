@@ -4,6 +4,9 @@ from django.contrib import admin
 from .models import Teacher, ParentalUnit, Homework, WishlistItem, \
     Activity, TodoItem, Message, TeamMember, HomeworkGrade
 
+class ParentsInline(admin.StackedInline):
+    model = ParentalUnit
+
 class TeacherModel(admin.ModelAdmin):
     def firstname(self, instance):
         return instance.user.first_name
@@ -12,6 +15,7 @@ class TeacherModel(admin.ModelAdmin):
         return instance.user.last_name
 
     list_display = ('user', 'firstname', 'lastname')
+    inlines = [ParentsInline]
 
 class ParentalUnitModel(admin.ModelAdmin):
     def firstname(self, instance):

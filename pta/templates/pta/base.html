@@ -78,7 +78,7 @@
                 <li class="{% if nbar == 'homework' %}active{% endif %}"><a href="{% url 'homework' %}">Homework</a></li>
                 <li><a href="#">Activities</a></li>
                 <li class="{% if nbar == 'todo' %}active{% endif %}"><a href="{% url 'todo' %}">To-Do List</a></li>
-                <li><a href="#">WishList</a></li>
+                <li class="{% if nbar == 'wishlist' %}active{% endif %}"><a href="{% url 'wishlist' %}">Wish List</a></li>
                 <li><a href="#">Message Board</a></li>
                 <li class="{% if nbar == 'meettheteam' %}active{% endif %}"><a href="{% url 'meettheteam' %}">Meet the Team</a></li>
             </ul>
