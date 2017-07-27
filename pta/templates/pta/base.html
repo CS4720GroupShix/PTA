@@ -72,7 +72,7 @@
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'homepage' %}">View User Info</a></li>
-                        <li><a href="#">Edit User Info</a></li>
+                        <li><a href="{% url 'edituser' %}">Edit User Info</a></li>
                     </ul>
                 </li>
                 <li class="{% if nbar == 'homework' %}active{% endif %}"><a href="{% url 'homework' %}">Homework</a></li>

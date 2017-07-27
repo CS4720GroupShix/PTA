@@ -10,6 +10,20 @@ div#mainNavigationRow nav ul, h2, h3, h4, .titillium
     font-family: 'Titillium Web', sans-serif;
 }
 
+div#topHeaderRow div.navbar-text {
+    color: #dbdbdb;
+}
+
+div#topHeaderRow a {
+   color: white;
+   text-decoration: none;
+}
+
+div#topHeaderRow a:hover {
+   color: #ccc;
+}
+
+
 /*
 .jumbotron {
     color: white;

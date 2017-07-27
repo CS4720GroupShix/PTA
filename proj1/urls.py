@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^abouttheteam/$', pta_views.meettheteam, name='meettheteam'),
     # url(r'^abouttheteam/$', pta_views.AboutTeamView.as_view(), name='meettheteam'),
     url(r'^$', pta_views.homepage, name='homepage'),
+    url(r'^edituser$', pta_views.edituser, name='edituser'),
     #url(r'^$', TemplateView.as_view(template_name='pta/home.html'), name='homepage'),
     url(r'^pta/', include('pta.urls')),
     url(r'^admin/', admin.site.urls),

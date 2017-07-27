@@ -11,7 +11,26 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Required.')
     last_name = forms.CharField(max_length=30, required=True, help_text='Required.')
     email = forms.EmailField(max_length=254, help_text='Required. Enter a valid email address.')
-    teacher = forms.ModelChoiceField(queryset=Teacher.objects.all(),empty_label=None,required=True, help_text='Required.')
+
+    CHOICES = [('', '---------'),('iamaparent', 'I am a parent'), ('iamateacher', 'I am a teacher')]
+
+    typeOfUser = forms.ChoiceField(choices=CHOICES, required=True, label="Role:")
+
+    teacher = forms.ModelChoiceField(queryset=Teacher.objects.all(), required=False, label="My teacher:")
+
+    def clean(self):
+        cleaned_data = super(SignUpForm, self).clean()
+        cleanedType = cleaned_data.get("typeOfUser")
+        teacher = cleaned_data.get("teacher")
+
+        if cleanedType == 'iamaparent' and not teacher:
+            print ("iamaparent and not teacher")
+            msg = forms.ValidationError("Please select a teacher.")
+            self.add_error('teacher', msg)
+            # raise forms.ValidationError(
+            #     "Please select a teacher."
+            # )
+
 
     class Meta:
         model = User
@@ -32,6 +51,13 @@ class AddWishlistForm(ModelForm):
     class Meta:
         model = WishlistItem
         fields = ('id','description',)
+
+class EditUserInfoForm(forms.Form):
+    first_name = forms.CharField(max_length=30, required=True, help_text='Required.', error_messages={'required': 'First name is required.'})
+    last_name = forms.CharField(max_length=30, required=True, help_text='Required.', error_messages={'required': 'Last name is required.'})
+    email = forms.EmailField(max_length=254, help_text='Required. Enter a valid email address.', error_messages={'required': 'Enter a valid email address.'})
+    classinfo = forms.CharField(max_length=1000, required=False)
+
 
 # class UserChooseForm(forms.Form):
 #     choose_user = forms.ChoiceField(choices=user_list())

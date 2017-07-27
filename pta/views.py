@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from pta.forms import SignUpForm, AddHomeworkForm, AddWishlistForm
+from pta.forms import SignUpForm, AddHomeworkForm, AddWishlistForm, EditUserInfoForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
@@ -27,6 +27,7 @@ def homepage(request):
     #current_user = auth.get_user(request)
 
     myContext = {}
+    myContext['nbar'] = 'home'
     try:
         parental = ParentalUnit.objects.get(user=request.user)
     except ParentalUnit.DoesNotExist:
@@ -43,27 +44,88 @@ def homepage(request):
             parentlist = ParentalUnit.objects.filter(teacher=teacher)
             myContext = {'teacher': teacher, 'parentlist': parentlist,}
 
-    myContext['nbar'] = 'home'
     return render(request, 'pta/home.html', myContext)
+
+@login_required()
+def edituser(request):
+    myContext = {}
+    myContext['nbar'] = 'home'
+
+    currUser = request.user
+
+    teacher = None
+    try:
+        parental = ParentalUnit.objects.get(user=request.user)
+    except ParentalUnit.DoesNotExist:
+        parental = None
+    if parental:
+        myContext['parentalunit'] = parental
+    else:
+        try:
+            teacher = Teacher.objects.get(user=request.user)
+        except Teacher.DoesNotExist:
+            teacher = None
+        if teacher:
+            myContext['teacher'] = teacher
+            myContext['classinfo'] = teacher.classinfo
+
+    if request.method == 'POST':
+        form = EditUserInfoForm(request.POST)
+        myContext['form'] = form
+
+        if form.is_valid():
+            currUser.first_name = form.cleaned_data['first_name']
+            currUser.last_name = form.cleaned_data['last_name']
+            currUser.email = form.cleaned_data['email']
+            currUser.save()
+
+            if teacher:
+                print("getting to teacher classinfo save")
+                teacher.classinfo = form.cleaned_data['classinfo']
+                teacher.save()
+
+            return redirect('homepage')
+
+    else:
+        form = EditUserInfoForm()
+        form.first_name = currUser.first_name
+        form.last_name = currUser.last_name
+        form.email = currUser.email
+        if teacher:
+            form.classinfo = teacher.classinfo
+        myContext['form'] = form
+
+    return render(request, 'pta/edituser.html', myContext)
+
 
 @login_required()
 def wishlist(request):
     myContext = {}
     myContext['nbar'] = 'wishlist'
 
-    if request.method == 'POST':
+    teacher = None
+    try:
+        parental = ParentalUnit.objects.get(user=request.user)
+    except ParentalUnit.DoesNotExist:
+        parental = None
+
+    if parental:
+        wishlist = WishlistItem.objects.filter(teacher=parental.teacher, received=False)
+        myContext['teacherof'] = parental.teacher
+        myContext['parental'] = parental
+        myContext['wishlist'] = wishlist
+    else:
         try:
-            parental = ParentalUnit.objects.get(user=request.user)
-        except ParentalUnit.DoesNotExist:
-            parental = None
-
-        if parental:
-            wishlist = WishlistItem.objects.filter(teacher=parental.teacher, received=False)
-            myContext['teacherof'] = parental.teacher
-            myContext['parental'] = parental
+            teacher = Teacher.objects.get(user=request.user)
+        except Teacher.DoesNotExist:
+            teacher = None
+        if teacher:
+            wishlist = WishlistItem.objects.filter(teacher=teacher)
             myContext['wishlist'] = wishlist
+            myContext['teacher'] = teacher
 
-            print("testing we got here")
+    if request.method == 'POST':
+        if parental:
             id_list = request.POST.getlist('wishchk')
             WishlistItem.objects.filter(id__in=id_list).filter(parentalUnit=None).update(parentalUnit=parental)
             WishlistItem.objects.filter(parentalUnit=parental).exclude(id__in=id_list).update(parentalUnit=None)
@@ -72,28 +134,13 @@ def wishlist(request):
             #     print(chkid)
             #     is_checked = request.POST.get(chkid, False)
             #     print(is_checked)
-
-    else:
-        try:
-            parental = ParentalUnit.objects.get(user=request.user)
-        except ParentalUnit.DoesNotExist:
-            parental = None
-
-        if parental:
-            wishlist = WishlistItem.objects.filter(teacher=parental.teacher, received=False)
-            myContext['teacherof'] = parental.teacher
-            myContext['parental'] = parental
-            myContext['wishlist'] = wishlist
+            return redirect('wishlist')
         else:
-            try:
-                teacher = Teacher.objects.get(user=request.user)
-            except Teacher.DoesNotExist:
-                teacher = None
-
             if teacher:
-                wishlist = WishlistItem.objects.filter(teacher=teacher)
-                myContext['wishlist'] = wishlist
-                myContext['teacher'] = teacher
+                id_list = request.POST.getlist('wishchk')
+                WishlistItem.objects.filter(id__in=id_list).filter(received=False).update(received=True)
+                WishlistItem.objects.filter(received=True).exclude(id__in=id_list).update(received=False)
+                return redirect('wishlist')
 
     return render(request, 'pta/wishlist.html', myContext)
 
@@ -124,18 +171,12 @@ def addwishlist(request):
                      received = False,
                 )
                 newWishlistItem.save()
-                return redirect('addwishlist')
+                return redirect('wishlist')
         else:
             form = AddWishlistForm()
             myContext['form'] = form
 
     return render(request, 'pta/addwishlist.html', myContext)
-
-
-
-
-
-
 
 
 
@@ -253,14 +294,22 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             theuser = form.save()
-            teach = form.cleaned_data.get('teacher')
 
-            parentalunit = ParentalUnit(
-                user=theuser,
-                teacher=teach,
-            )
-            parentalunit.save()
-#           ParentalUnit.objects.create(user=theuser, teacher=teach)
+            role = form.cleaned_data.get('typeOfUser')
+            if role == 'iamateacher':
+                teacher = Teacher(
+                    user=theuser,
+                )
+                teacher.save()
+            else:
+                teach = form.cleaned_data.get('teacher')
+
+                parentalunit = ParentalUnit(
+                    user=theuser,
+                    teacher=teach,
+                )
+                parentalunit.save()
+    #           ParentalUnit.objects.create(user=theuser, teacher=teach)
 
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
